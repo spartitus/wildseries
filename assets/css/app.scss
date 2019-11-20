@@ -1,0 +1,12 @@
+@import "~bootstrap/scss/bootstrap";
+@import "variables.scss";
+@import "font";
+
+body {
+  background-color: $mainColor;
+}
+
+.navbar-light .navbar-brand {
+  color: #79CACA;
+}
+
