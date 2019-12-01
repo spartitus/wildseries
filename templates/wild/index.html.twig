@@ -1,23 +1,18 @@
+{% extends  'base.html.twig' %}
 
+{% block title %}All programs{% endblock %}
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
-</head>
-
-<body>
-<header>
-    {% include 'navbar.html.twig' %}
-</header>
-
-<h1>{{ website }} index</h1>
-{% block javascripts %}
-    {{ encore_entry_link_tags('app') }}
+{% block body %}
+    <h1>Toutes les séries de la table program : </h1><br>
+    {% for program in programs %}
+        <div>
+            <h2>{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
+            <p>{{ program.summary }}</p>
+        </div>
+    {% else %}
+        Aucune série trouvée.
+    {% endfor %}
+    <a href="{{ path('app_index') }}">
+        Retour à l'accueil
+    </a>
 {% endblock %}
-</body>
-</html>
