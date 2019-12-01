@@ -51,7 +51,11 @@ class WildController extends AbstractController
         );
         $program = $this->getDoctrine()
             ->getRepository(Program::class)
-            ->findOneBy(['title' => mb_strtolower($slug)]);
+            ->findOneBy([
+                'title' => mb_strtolower($slug)
+            ]);
+dd($program);
+
         if (!$program) {
             throw $this->createNotFoundException( 'No program with '.$slug.' title, found in program\'s table.');
         }
@@ -65,7 +69,6 @@ class WildController extends AbstractController
      * @param string $categoryName
      * @return Response
      */
-
     public function showByCategory(string $categoryName): Response
     {
         if (!$categoryName) {
@@ -93,7 +96,6 @@ class WildController extends AbstractController
             'category' => $category,
         ]);
     }
-    public function bdd() {
 
-    }
 }
+
