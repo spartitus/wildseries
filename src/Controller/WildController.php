@@ -22,30 +22,6 @@ class WildController extends AbstractController
 {
 
     /**
-     * Forms
-     * @Route("/add", name="add", methods={"GET", "POST"})
-     * @return Response
-     */
-    public function new(EntityManagerInterface $em, Request $request)
-    {
-        $category = new Category();
-        $category->setName('Sweet Opera');
-        $form = $this->createForm(CategoryType::class, $category);
-        $form-> handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $em->persist($category);
-            $em->flush();
-            return $this->redirectToRoute('wild_add');
-        }
-            return $this->render(
-            'wild/add.html.twig',
-            ['form' => $form->createView(),]
-        );
-    }
-
-
-    /**
      * Show all rows from Program’s entity
      *
      * @Route("", name="index")
