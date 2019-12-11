@@ -165,10 +165,13 @@ class WildController extends AbstractController
      */
     public function showEpisode(Episode $episode)
     {
-        $program = $episode->getSeason()->getProgram();
+        $season = $episode->getSeason();
+        $program = $season->getProgram();
+
         return $this->render('wild/episode.html.twig', [
             'episode' => $episode,
             'program' => $program,
+            'season'  =>$season,
         ]);
 
         //TODO render in twig to show episode data. access to program name in twig with episode.season.program.title

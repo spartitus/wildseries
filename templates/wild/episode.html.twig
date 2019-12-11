@@ -4,6 +4,13 @@
 
 {% block body %}
 
-    {{ program.title}} {{ episode.title }}
+    <h1> Nom de la série :  {{ program.title}} </h1>
+    <h2> <a href="{{ path('wild_show', {'slug' : program.title}) }}">Détails de la série </a></h2>
+    <p> <a href="{{ path('wild_show_season', {'id': season.id}) }}">Episodes de la saison {{ season.number }}</a></p>
+    <p> </p>
+
+    <p>  Titre de l'épisode : "{{ episode.title }}" </p>
+    <p>  Résumé de l'épisode : "{{ episode.synopsis }} "</p>
+
 
 {% endblock %}
