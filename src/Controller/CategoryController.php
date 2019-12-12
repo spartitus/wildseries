@@ -25,17 +25,17 @@ class CategoryController extends AbstractController
      * @Route("/add", name="add", methods={"GET", "POST"})
      * @return Response
      */
-    public function new(EntityManagerInterface $em, Request $request)
+    public function add(EntityManagerInterface $em, Request $request)
     {
         $category = new Category();
-        $category->setName('Sweet Opera');
+        $category->setName('Ready to add a new category ?');
         $form = $this->createForm(CategoryType::class, $category);
         $form-> handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em->persist($category);
             $em->flush();
-            return $this->redirectToRoute('wild_add');
+            return $this->redirectToRoute('category_add');
         }
         return $this->render(
             'wild/add.html.twig',
