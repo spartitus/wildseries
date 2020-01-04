@@ -9,6 +9,8 @@ Liens vers les vidéos :
 
 12 - https://www.loom.com/share/7f468db32951497cb68c8026f388a9ee
 
+13 - https://www.loom.com/share/55a8b8fb3c0a412a89d9986ee3319992
+
 
 
 
