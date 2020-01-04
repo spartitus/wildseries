@@ -23,6 +23,18 @@
                 <th>Poster</th>
                 <td>{{ program.poster }}</td>
             </tr>
+            <tr>
+                <th>Actors</th>
+                <td>
+                    <ul>
+                        {% for actor in program.actors %}
+                        <li>{{ actor.name }}</li>
+                        {% else %}
+                        <li>Aucun acteur pour cette série</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
         </tbody>
     </table>
 
