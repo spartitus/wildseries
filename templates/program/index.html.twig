@@ -7,13 +7,14 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Summary</th>
-                <th>Poster</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Summary</th>
+            <th>Poster</th>
+            <th>Actors</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for program in programs %}
@@ -21,10 +22,21 @@
                 <td>{{ program.id }}</td>
                 <td>{{ program.title }}</td>
                 <td>{{ program.summary }}</td>
-                <td>{{ program.poster }}</td>
+                <td><img src="{{ program.poster }}" alt="poster de la série" class="w-50"></td>
                 <td>
-                    <a href="{{ path('program_show', {'id': program.id}) }}">show</a>
-                    <a href="{{ path('program_edit', {'id': program.id}) }}">edit</a>
+                    <ul>
+                        {% for actor in program.actors %}
+                            <li>
+                                {{ actor.name }}
+                            </li>
+                        {% else %}
+                            Aucun acteur
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <a href="{{ path('program_show', {'slug': program.slug}) }}">show</a>
+                    <a href="{{ path('program_edit', {'slug': program.slug}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +47,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('program_new') }}">Create new</a>
+    <a href="{{ path('program_new') }}">Créer une série</a>
+    <a href="{{ path('season_index') }}">Liste des saisons</a>
 {% endblock %}
