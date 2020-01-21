@@ -1,16 +1,41 @@
 {% extends 'base.html.twig' %}
-{% block title %}{% endblock %}
+
+{% block title %} {{ program.title }} {% endblock %}
 
 
 {% block body %}
 
-    <h1> Nom de la série :  {{ program.title}} </h1>
-    <h2> <a href="{{ path('wild_show', {'slug' : program.title}) }}">Détails de la série </a></h2>
-    <p> <a href="{{ path('wild_show_season', {'id': season.id}) }}">Episodes de la saison {{ season.number }}</a></p>
-    <p> </p>
+    <div class="media">
+        <div class="media-body">
+            <h1> {{ program.title}} </h1>
+            <h2> Saison {{ episode.season.number }} - Episode N°{{ episode.number }} </h2>
+            <p> Résumé : {{ episode.synopsis }}</p>
+            <h3>Commentaires</h3>
 
-    <p>  Titre de l'épisode : "{{ episode.title }}" </p>
-    <p>  Résumé de l'épisode : "{{ episode.synopsis }} "</p>
+            {% for comment in comments %}
+         <div>
+
+                <p> ********* <br> {{ comment.comment }}</p>
+                <p>
+                    Note : {{ comment.rate }} - Auteur : {{ comment.author.email }}
+                </p>
+
+                {% endfor %}
+         </div>
+
+        </div>
+        <div class="container">
+            {% if app.user %}
+                <h3>Add a comment:</h3>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+                <button class="btn">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+            {% endif %}
+        </div>
+
+    </div>
+
 
 
 {% endblock %}

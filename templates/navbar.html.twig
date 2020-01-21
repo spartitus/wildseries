@@ -9,7 +9,13 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="{{ path('wild_index') }}">Liste des séries</a>
-                <a class="nav-item nav-link" href="#"></a>
+                <a class="nav-item nav-link" href="#">Lien N°3</a>
+                {% if app.user %}
+                    {{ app.user.email }}
+                    <a class="nav-item nav-link active" href="{{ path('app_logout') }}"> Se déconnecter</a>
+                {% else %}
+                    <a class="nav-item nav-link active" href="{{ path('app_login') }}"> Se connecter</a>
+                {% endif %}
                 <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
             </div>
         </div>

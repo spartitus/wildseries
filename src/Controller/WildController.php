@@ -2,17 +2,20 @@
 // src/Controller/WildController.php
 namespace App\Controller;
 
-use App\Entity\Episode;
-use App\Entity\Season;
-use App\Entity\Program;
+use App\Entity\Actor;
 use App\Entity\Category;
+use App\Entity\Comment;
+use App\Entity\Episode;
+use App\Entity\Program;
+use App\Entity\Season;
+use App\Entity\User;
+use App\Form\CommentType;
+use App\Form\ProgramSearchType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\CategoryType;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/wild", name="wild_")
@@ -137,17 +140,37 @@ class WildController extends AbstractController
         ]);
     }
     /**
-     * @Route("/episode/{episode}", name="episode")
+     * @Route("/episode/{id}", name="show_episode")
+     * @param Episode $episode
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
      */
-    public function showEpisode(Episode $episode)
+    public function showByEpisode(Episode $episode, Request $request, EntityManagerInterface $em): Response
     {
         $season = $episode->getSeason();
         $program = $season->getProgram();
+        $comments = $episode->getComments();
+
+        $comment = new Comment();
+        $form  = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $author = $this->getUser();
+            $comment->setEpisode($episode);
+            $comment->setAuthor($author);
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('wild_show_episode', ['id' => $episode->getId()]);
+        }
 
         return $this->render('wild/episode.html.twig', [
             'episode' => $episode,
             'program' => $program,
             'season'  =>$season,
+            'comments' => $comments,
+            'form' => $form->createView(),
         ]);
 
         //TODO render in twig to show episode data. access to program name in twig with episode.season.program.title
