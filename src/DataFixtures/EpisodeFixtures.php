@@ -1,6 +1,7 @@
 <?php
-namespace App\DataFixtures;
 
+
+namespace App\DataFixtures;
 use App\Service\Slugify;
 use Faker;
 use App\Entity\Episode;
@@ -14,7 +15,6 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('fr_FR');
         $slugify = new Slugify();
-
         for ($i = 0; $i < 20; $i++) {
             $episode = new Episode();
             $episode->setTitle($faker->title);
@@ -27,6 +27,7 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
         }
         $manager->flush();
     }
+
     public function getDependencies()
     {
         return [SeasonFixtures::class];

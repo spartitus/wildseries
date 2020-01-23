@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\DataFixtures;
-
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -11,16 +9,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
-        private $passwordEncoder;
+    private $passwordEncoder;
 
-        public function __construct(UserPasswordEncoderInterface $passwordEncoder)
-        {
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
         $this->passwordEncoder = $passwordEncoder;
-        }
+    }
 
-        public function load(ObjectManager $manager)
-        {
-        // Création d'un utilisateur de type "auteur"
+    public function load(ObjectManager $manager)
+    {
         $subscriber = new User();
         $subscriber->setEmail('subscriber@monsite.com');
         $subscriber->setRoles(['ROLE_SUBSCRIBER']);
@@ -28,10 +25,17 @@ class UserFixtures extends Fixture
             $subscriber,
             'subscriberpassword'
         ));
-
         $manager->persist($subscriber);
 
-        // Création d'un utilisateur de type "administrateur"
+        $newSubscriber = new User();
+        $newSubscriber->setEmail('spartitus@hotmail.fr');
+        $newSubscriber->setRoles(['ROLE_SUBSCRIBER']);
+        $newSubscriber->setPassword($this->passwordEncoder->encodePassword(
+            $newSubscriber,
+            'maxpassword'
+        ));
+        $manager->persist($newSubscriber);
+
         $admin = new User();
         $admin->setEmail('admin@monsite.com');
         $admin->setRoles(['ROLE_ADMIN']);

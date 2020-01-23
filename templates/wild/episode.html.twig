@@ -13,16 +13,14 @@
             <h3>Commentaires</h3>
 
             {% for comment in comments %}
-         <div>
-
+            <div>
                 <p> ********* <br> {{ comment.comment }}</p>
-                <p>
-                    Note : {{ comment.rate }} - Auteur : {{ comment.author.email }}
-                </p>
-
-                {% endfor %}
-         </div>
-
+                <p> Note : {{ comment.rate }} - Auteur : {{ comment.author.email }} </p>
+                {% if app.user.id is defined and app.user.id == comment.author.id %}
+                    {{ include('wild/comment_delete_form.html.twig') }}
+                {% endif %}
+             {% endfor %}
+             </div>
         </div>
         <div class="container">
             {% if app.user %}
@@ -35,7 +33,4 @@
         </div>
 
     </div>
-
-
-
 {% endblock %}
