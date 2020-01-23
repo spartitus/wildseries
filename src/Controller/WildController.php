@@ -172,9 +172,37 @@ class WildController extends AbstractController
             'comments' => $comments,
             'form' => $form->createView(),
         ]);
-
-        //TODO render in twig to show episode data. access to program name in twig with episode.season.program.title
     }
 
+    /**
+     * @Route("/{comment}", name="comment_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Comment $comment
+     * @return Response
+     */
+    public function deleteCommentUser(Request $request, Comment $comment): Response
+    {
+        $episode = $comment->getEpisode();
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($comment);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('wild_show_episode', ['id' => $episode->getId()]);
+    }
+
+    /**
+     * @Route("/actor/{name}", name="actor")
+     * @param Actor $actor
+     * @return Response
+     */
+    public function showActor(Actor $actor): Response
+    {
+        $programs = $actor->getPrograms();
+        return $this->render('wild/actor.html.twig', [
+            'actor' => $actor,
+            'programs' => $programs,
+        ]);
+    }
 }
 

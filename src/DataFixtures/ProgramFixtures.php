@@ -1,5 +1,8 @@
 <?php
+
+
 namespace App\DataFixtures;
+
 use App\Entity\Program;
 use App\Service\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -51,6 +54,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         }
         $manager->flush();
     }
+
     public function getDependencies()
     {
         return [CategoryFixtures::class];

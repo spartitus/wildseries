@@ -1,4 +1,6 @@
 <?php
+
+
 namespace App\DataFixtures;
 use Faker;
 use App\Entity\Season;
@@ -11,17 +13,18 @@ class SeasonFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $season = new Season();
             $season->setYear($faker->year);
+            $season->setNumber($faker->randomDigitNotNull);
             $season->setDescription($faker->text);
-            $season->setNumber($faker->randomDigit);
             $manager->persist($season);
             $this->addReference('season_' . $i, $season);
             $season->setProgram($this->getReference('program_' . rand(0,5)));
         }
         $manager->flush();
     }
+
     public function getDependencies()
     {
         return [ProgramFixtures::class];
