@@ -23,4 +23,7 @@ Liens vers les vidéos :
 
 19 - https://www.loom.com/share/14fe0d7e9af54b6b9aa2a2840d75b81b
 
+20 - https://www.loom.com/share/e6f59f19afd8462bb355ebf869a9777a
+
+
 
