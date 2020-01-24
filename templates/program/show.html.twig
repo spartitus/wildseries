@@ -23,16 +23,23 @@
             <th>Poster</th>
             <td><img src="{{ program.poster }}" alt="poster de la série" class="w-25"></td>
         </tr>
+        <tr>
+            <th>Acteur :</th>
+            <td>
+                <ul>
+                    {% for actor in program.actors %}
+                        <li><a href="{{ path('actor_show', {'slug': actor.slug}) }}">{{ actor.name }}</a></li>
+                    {% else %}
+                        <li>Aucun acteur pour cette série</li>
+                    {% endfor %}
+                </ul>
+
+            </td>
+
+        </tr>
         </tbody>
     </table>
-    <strong>Acteur :</strong>
-    <ul>
-        {% for actor in program.actors %}
-            <li><a href="{{ path('actor_show', {'slug': actor.slug}) }}">{{ actor.name }}</a></li>
-        {% else %}
-            <li>Aucun acteur pour cette série</li>
-        {% endfor %}
-    </ul>
+
 
     <a href="{{ path('program_index') }}">back to list</a>
 
