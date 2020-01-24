@@ -8,6 +8,11 @@ body {
 
 .navbar-light .navbar-brand {
   color: #79CACA;
+  height: 4rem;
+}
+
+.navbar-light .navbar-nav .nav-link.active {
+  color: $mainColor;
 }
 
 
