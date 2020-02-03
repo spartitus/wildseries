@@ -21,7 +21,7 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="ne me laisse pas tout vide")
      */
     private $name;
 
