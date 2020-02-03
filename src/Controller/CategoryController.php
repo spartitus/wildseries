@@ -7,13 +7,13 @@ use App\Entity\Season;
 use App\Entity\Program;
 use App\Entity\Category;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Form\CategoryType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 /**
@@ -26,7 +26,6 @@ class CategoryController extends AbstractController
      * Forms
      * @Route("/add", name="add", methods={"GET", "POST"})
      * @return Response
-     * @IsGranted("ROLE_ADMIN")
      */
     public function add(EntityManagerInterface $em, Request $request)
     {
@@ -47,4 +46,3 @@ class CategoryController extends AbstractController
     }
 
 }
-
