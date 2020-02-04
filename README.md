@@ -25,6 +25,8 @@ Liens vers les vidéos :
 
 20 - https://www.loom.com/share/e6f59f19afd8462bb355ebf869a9777a
 
-21 - https://www.loom.com/share/e495aa782ade4f59965921a6a0b5203c
+21 - https://gitwww.loom.com/share/e495aa782ade4f59965921a6a0b5203c
+
+22 - No video
 
 
