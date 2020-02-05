@@ -12,6 +12,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\NamedAddress;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route("/program")
@@ -57,6 +58,8 @@ class ProgramController extends AbstractController
 
             $mailer->send($email);
 
+            $this->addFlash('success', 'La série a bien été ajoutée');
+
             return $this->redirectToRoute('program_index');
         }
         return $this->render('program/new.html.twig', [
@@ -90,6 +93,8 @@ class ProgramController extends AbstractController
             $slug = $slugify->generate($program->getTitle());
             $program->setSlug($slug);
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'La série a bien été modifiée');
             return $this->redirectToRoute('program_index');
         }
         return $this->render('program/edit.html.twig', [
@@ -107,6 +112,7 @@ class ProgramController extends AbstractController
             $entityManager->remove($program);
             $entityManager->flush();
         }
+        $this->addFlash('danger', 'La série a bien été supprimée');
         return $this->redirectToRoute('program_index');
     }
 }
